@@ -22,16 +22,18 @@
     <h1 class="border-bottom">Register</h1>
     <div class="d-flex justify-content-center ">
         <div class="row g-3">
+<!--            Register DATA = <span th:text="${registerData}"></span>-->
             <form
-                    action="/"
-                    method="">
+                    th:object="${registerData}"
+                    th:action="@{/users/register}"
+                    th:method="POST"
+            >
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label ">Username</label>
                     </div>
                     <div class="col-auto">
-                        <input name="username"
-                               
+                        <input th:field="*{username}"
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputUsername"
@@ -51,7 +53,7 @@
                         <label for="inputFullName" class="col-form-label ">Full Name</label>
                     </div>
                     <div class="col-auto">
-                        <input name="fullname"
+                        <input name="fullName"
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputFullName"
