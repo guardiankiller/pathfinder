@@ -5,9 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -21,4 +18,31 @@ public class Category {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CategoryNames name;
+
+    public Category() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public CategoryNames getName() {
+        return name;
+    }
+
+    public void setName(CategoryNames name) {
+        this.name = name;
+    }
 }
