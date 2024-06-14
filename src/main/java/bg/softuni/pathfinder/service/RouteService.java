@@ -3,6 +3,7 @@ package bg.softuni.pathfinder.service;
 import bg.softuni.pathfinder.data.RouteRepository;
 import bg.softuni.pathfinder.model.Picture;
 import bg.softuni.pathfinder.model.Route;
+import bg.softuni.pathfinder.service.dto.RouteInfoDTO;
 import bg.softuni.pathfinder.service.dto.RouteShortInfoDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,14 @@ import java.util.Random;
 
 @Service
 public class RouteService {
-    private RouteRepository routeRepository;
-    private Random random;
-    private ModelMapper modelMapper;
+    private final RouteRepository routeRepository;
+    private final Random random;
+    private final ModelMapper modelMapper;
+    private final CurrentUser currentUser;
 
-    public RouteService(RouteRepository routeRepository) {
+    public RouteService(RouteRepository routeRepository, CurrentUser currentUser) {
         this.routeRepository = routeRepository;
+        this.currentUser = currentUser;
 
         this.modelMapper = new ModelMapper();
         this.random = new Random();
@@ -54,5 +57,11 @@ public class RouteService {
         dto.setImageUrl(first.get().getUrl());
 
         return dto;
+    }
+
+    public void addRoute(RouteInfoDTO data) {
+        Route route = modelMapper.map(data, Route.class);
+        route.setAuthor(currentUser.getUser());
+        routeRepository.save(route);
     }
 }

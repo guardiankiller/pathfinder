@@ -1,10 +1,11 @@
 package bg.softuni.pathfinder.web.dto;
 
+import bg.softuni.pathfinder.model.Level;
 import jakarta.validation.constraints.*;
 
 public class UserRegisterDTO {
     @NotBlank
-    @NotNull
+    @Size(min = 2)
     private String username;
 
     @NotEmpty
@@ -18,9 +19,10 @@ public class UserRegisterDTO {
     @Max(90)
     private Integer age;
 
+    private Level level;
+
     @Size(min = 5)
     private String password;
-
 
     private String confirmPassword;
 
@@ -73,5 +75,13 @@ public class UserRegisterDTO {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 }
